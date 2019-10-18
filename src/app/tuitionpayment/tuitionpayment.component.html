@@ -1,0 +1,57 @@
+<table class="table">
+  <tr>
+    <td>
+      <strong>Tuition and Fees Due</strong>
+    </td>
+    <td class="text-right" *ngFor="let stud of students;let i=index">
+      <strong>{{stud.firstName}}</strong>
+    </td>
+    <td class="text-right">
+      <strong>Family Fees</strong>
+    </td>
+    <td class="text-right">
+      <strong>Total</strong>
+    </td>
+  </tr>
+  <tr *ngFor="let fee of feesData.feeRows;let i=index">
+    <td>
+      {{fee.name}}
+    </td>
+    <td class="text-right" *ngFor="let amount of fee.amounts;let j=index">
+      {{amount}}
+    </td>
+    <td class="text-right">
+      {{fee.total}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sub Total
+    </td>
+    <td class="text-right" *ngFor="let amount of feesData.feeTotalRow.amounts;let j=index">
+      {{amount | currency : 'USD':false}}
+    </td>
+    <td class="text-right">
+      {{feesData.feeTotalRow.total}}
+    </td>
+  </tr>
+  <tr *ngIf="feesData.ccFeeAmount>0">
+    <td class="text-right" colspan="4">Total Due </td>
+    <td class="text-right"> {{feesData.feeTotalRow.total}}</td>
+  </tr>
+  <tr>
+    <td  class="text-right" colspan="4">
+      Total
+    </td>
+    <td class="text-right">
+      {{feesData.feeTotalRow.total}}
+    </td>
+  </tr>
+</table>
+
+<app-paymentdetails> </app-paymentdetails>
+
+<div class="margin-20">
+  <button uiSref="student" class="btn btn-primary pull-left"> <span style="margin-right:10px;" class="glyphicon glyphicon-arrow-left"> Previous</span></button>
+  <button uiSref="result" type="submit" class="btn btn-primary pull-right"> Next <span style="margin-left:10px;" class="glyphicon glyphicon-arrow-right"></span></button>
+</div>
